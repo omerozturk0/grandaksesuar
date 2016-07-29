@@ -55,8 +55,5 @@ Route::group([
 
     Route::get('/', 'Frontend\SiteController@index');
     Route::get('{slug}', 'Frontend\SiteController@routeBySlug');
-    Route::get('control/deneme', function (\App\Helpers\NavigationBar $nav) {
-        return $nav->makeNavBar();
-    });
 
 });
