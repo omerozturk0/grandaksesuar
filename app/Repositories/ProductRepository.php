@@ -30,6 +30,21 @@ class ProductRepository extends BaseRepository
         return $this->model->module($this->moduleId)->with('translates')->get();
     }
 
+    public function allPopularProducts()
+    {
+        return $this->model->module($this->moduleId)->where('is_active', 1)->orderBy('visited', 'desc')->limit(3)->with('translates')->get();
+    }
+
+    public function allDiscountProducts()
+    {
+        return $this->model->module($this->moduleId)->where('is_active', 1)->where('discount', '!=', null)->limit(3)->with('translates')->get();
+    }
+
+    public function allNewestProducts()
+    {
+        return $this->model->module($this->moduleId)->where('is_active', 1)->orderBy('updated_at', 'desc')->limit(3)->with('translates')->get();
+    }
+
     public function create($request)
     {
         $this->backend->RequestsFilter($request);
@@ -123,6 +138,13 @@ class ProductRepository extends BaseRepository
         }
 
         $product->delete();
+    }
+
+    public function visited($id)
+    {
+        $product = $this->getById($id);
+        $product->visited = $product->visited + 1;
+        $product->save();
     }
 
     public function imageUpload($request, $product)

@@ -91,4 +91,9 @@ class Post extends Model
     {
         return $this->belongsToMany('App\CustomerGroup', 'posts_customer_groups_attributes', 'post_id', 'customer_group_id')->withPivot('attribute_id')->with('translates');
     }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
 }

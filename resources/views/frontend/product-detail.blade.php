@@ -15,19 +15,23 @@
                         <div class="badges">
                             <div class="hot">{!! $static->native('new')->title !!}</div>
                         </div>
-                        <div class="owl-carousel img-carousel">
-                            @foreach($post->pictures as $key => $picture)
-                                <div class="item">
-                                    <a class="btn btn-theme btn-theme-transparent btn-zoom" href="{{ url('userfiles/bigs/'.$picture->name) }}" data-gal="prettyPhoto"><i class="fa fa-plus"></i></a>
-                                    <a href="{{ url('userfiles/bigs/'.$picture->name) }}" data-gal="prettyPhoto"><img class="img-responsive" src="{{ url('userfiles/images/'.$picture->name) }}" alt=""/></a>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="row product-thumbnails">
-                            @foreach($post->pictures as $key => $picture)
-                                <div class="col-xs-2 col-sm-2 col-md-3"><a href="#" onclick="jQuery('.img-carousel').trigger('to.owl.carousel', [{{ $key }}, 300]);"><img src="{{ url('userfiles/thumbs/'.$picture->name) }}" alt=""/></a></div>
-                            @endforeach
-                        </div>
+                        @if(count($post->pictures))
+                            <div class="owl-carousel img-carousel">
+                                @foreach($post->pictures as $key => $picture)
+                                    <div class="item">
+                                        <a class="btn btn-theme btn-theme-transparent btn-zoom" href="{{ url('userfiles/bigs/'.$picture->name) }}" data-gal="prettyPhoto"><i class="fa fa-plus"></i></a>
+                                        <a href="{{ url('userfiles/bigs/'.$picture->name) }}" data-gal="prettyPhoto"><img class="img-responsive" src="{{ url('userfiles/images/'.$picture->name) }}" alt=""/></a>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="row product-thumbnails">
+                                @foreach($post->pictures as $key => $picture)
+                                    <div class="col-xs-2 col-sm-2 col-md-3"><a href="#" onclick="jQuery('.img-carousel').trigger('to.owl.carousel', [{{ $key }}, 300]);"><img src="{{ url('userfiles/thumbs/'.$picture->name) }}" alt=""/></a></div>
+                                @endforeach
+                            </div>
+                        @else
+                            <img src="{{ url('assets/images/product.png') }}" alt="Image Not Found" />
+                        @endif
                     </div>
                     <div class="col-md-6">
                         <div class="back-to-category">

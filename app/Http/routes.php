@@ -55,5 +55,6 @@ Route::group([
 
     Route::get('/', 'Frontend\SiteController@index');
     Route::get('{slug}', 'Frontend\SiteController@routeBySlug');
+    Route::get('cat/{slug}', 'Frontend\SiteController@routeCatBySlug');
 
 });

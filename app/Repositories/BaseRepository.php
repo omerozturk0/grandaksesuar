@@ -13,7 +13,7 @@ abstract class BaseRepository
 
     public function getBySlug($slug)
     {
-        return $this->model->where('slug', $slug)->first();
+        return $this->model->whereTranslation('slug', $slug)->with('translates')->first();
     }
 
     public function isOwner($id)

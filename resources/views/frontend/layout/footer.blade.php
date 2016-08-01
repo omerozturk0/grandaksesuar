@@ -74,12 +74,12 @@
                 <div class="col-sm-6">
                     <div class="payments">
                         <ul>
-                            <li><img src="assets/img/preview/payments/visa.jpg" alt=""/></li>
-                            <li><img src="assets/img/preview/payments/mastercard.jpg" alt=""/></li>
-                            <li><img src="assets/img/preview/payments/paypal.jpg" alt=""/></li>
-                            <li><img src="assets/img/preview/payments/american-express.jpg" alt=""/></li>
-                            <li><img src="assets/img/preview/payments/visa-electron.jpg" alt=""/></li>
-                            <li><img src="assets/img/preview/payments/maestro.jpg" alt=""/></li>
+                            <li><img src="{{ url('assets/img/preview/payments/visa.jpg') }}" alt="Visa"/></li>
+                            <li><img src="{{ url('assets/img/preview/payments/mastercard.jpg') }}" alt="Master Card"/></li>
+                            <li><img src="{{ url('assets/img/preview/payments/paypal.jpg') }}" alt="Paypal"/></li>
+                            <li><img src="{{ url('assets/img/preview/payments/american-express.jpg') }}" alt="American Express"/></li>
+                            <li><img src="{{ url('assets/img/preview/payments/visa-electron.jpg') }}" alt="Visa Electron"/></li>
+                            <li><img src="{{ url('assets/img/preview/payments/maestro.jpg') }}" alt="Maestro"/></li>
                         </ul>
                     </div>
                 </div>

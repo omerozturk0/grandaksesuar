@@ -2683,6 +2683,13 @@ input[type=checkbox] {
   margin: 10px 10px 0 0;
   padding: 7px 15px 7px 15px;
 }
+.pagination > li > span {
+  font-weight: 700;
+  background-color: transparent;
+  color: #232323;
+  margin: 10px 10px 0 0;
+  padding: 7px 15px 7px 15px;
+}
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
   border-radius: 0;

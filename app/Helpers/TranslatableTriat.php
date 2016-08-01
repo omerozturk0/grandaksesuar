@@ -25,7 +25,7 @@ trait TranslatableTriat
     {
         if (in_array($key, $this->translatedAttributes)) {
             if ($this->translated() === null) {
-                return $this->translated('tr')->$key;
+                return;
             }
 
             return $this->translated()->$key;

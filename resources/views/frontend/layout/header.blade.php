@@ -5,7 +5,7 @@
             <div class="cart-items">
                 <div class="cart-items-inner">
                     <div class="media">
-                        <a class="pull-left" href="#"><img class="media-object item-image" src="assets/img/preview/shop/order-1s.jpg" alt=""></a>
+                        <a class="pull-left" href="#"><img class="media-object item-image" src="{{ url('assets/img/preview/shop/order-1s.jpg') }}" alt=""></a>
                         <p class="pull-right item-price">$450.00</p>
                         <div class="media-body">
                             <h4 class="media-heading item-title"><a href="#">1x Standard Product</a></h4>
@@ -38,8 +38,8 @@
     <div class="container">
         <div class="top-bar-left">
             <ul class="list-inline">
-                <li class="icon-user"><a href="login.html"><img src="assets/img/icon-1.png" alt=""/> <span>Login</span></a></li>
-                <li class="icon-form"><a href="login.html"><img src="assets/img/icon-2.png" alt=""/> <span>Not a Member? <span class="colored">Sign Up</span></span></a></li>
+                <li class="icon-user"><a href="login.html"><img src="{{ url('assets/img/icon-1.png') }}" alt=""/> <span>Login</span></a></li>
+                <li class="icon-form"><a href="login.html"><img src="{{ url('assets/img/icon-2.png') }}" alt=""/> <span>Not a Member? <span class="colored">Sign Up</span></span></a></li>
                 <li><a href="mailto:{{ settings('site_email') }}"><i class="fa fa-envelope"></i> <span>{{ settings('site_email') }}</span></a></li>
             </ul>
         </div>
@@ -64,7 +64,7 @@
 
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="assets/img/logo-bella-shop.png" alt="{{ settings('site_title') }}" title="{{ settings('site_title') }}" /></a>
+                <a href="index.html"><img src="{{ url('assets/img/logo-bella-shop.png') }}" alt="{{ settings('site_title') }}" title="{{ settings('site_title') }}" /></a>
             </div>
             <!-- /Logo -->
 

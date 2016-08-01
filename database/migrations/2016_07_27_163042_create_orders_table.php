@@ -14,12 +14,17 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('product_id');
+            $table->integer('product_id')->unsigned();
             $table->integer('user_id')->nullable();
             $table->text('order_content');
             $table->integer('quantity')->default(1);
             $table->boolean('status');
             $table->timestamps();
+
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('posts')
+                ->onDelete('restrict');
         });
     }
 

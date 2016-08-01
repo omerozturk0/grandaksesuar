@@ -8,6 +8,7 @@ use App\Category;
 class CategoryRepository extends BaseRepository
 {
     private $backend;
+    public $model;
 
     public function __construct(Category $category, Backend $backend)
     {
