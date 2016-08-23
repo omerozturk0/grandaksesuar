@@ -32,9 +32,9 @@
 
                     <h2 class="panel-title">Menü Düzenle</h2>
 
-                    @if($menu->name)
+                    @if($menu->title)
                     <p class="panel-subtitle">
-                        {{ $menu->name }} <i class="fa fa-level-up"></i>
+                        {{ $menu->title }} <i class="fa fa-level-up"></i>
                     </p>
                     @endif
                 </header>
@@ -71,6 +71,7 @@
         $('select[name="parent_id"]').select2().select2('val', '{{ $menu->parent_id }}');
         $('select[name="post_id"]').select2().select2('val', '{{ $menu->post_id }}');
         $('select[name="locale"]').select2().select2('val', '{{ app()->getLocale() }}');
+        $('select[name="area"]').select2().select2('val', '{{ $menu->area }}');
     </script>
     <script>
         $('select[name="locale"]').bind('change', function (e) {

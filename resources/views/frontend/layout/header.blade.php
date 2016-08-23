@@ -44,14 +44,7 @@
             </ul>
         </div>
         <div class="top-bar-right">
-            <ul class="list-inline">
-                <li class="hidden-xs"><a href="about.html">About</a></li>
-                <li class="hidden-xs"><a href="blog.html">Blog</a></li>
-                <li class="hidden-xs"><a href="accountinformation.html">My Account</a></li>
-                <li class="hidden-xs"><a href="contact.html">Contact</a></li>
-                <li class="hidden-xs"><a href="faq.html">FAQ</a></li>
-                <li class="hidden-xs"><a href="wishlist.html">My Wishlist</a></li>
-            </ul>
+            {!! $frontMenus->makeNavBar() !!}
         </div>
     </div>
 </div>
@@ -64,7 +57,7 @@
 
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="{{ url('assets/img/logo-bella-shop.png') }}" alt="{{ settings('site_title') }}" title="{{ settings('site_title') }}" /></a>
+                <a href="{{ url('/') }}"><img src="{{ url('assets/img/logo-bella-shop.png') }}" alt="{{ settings('site_title') }}" title="{{ settings('site_title') }}" /></a>
             </div>
             <!-- /Logo -->
 

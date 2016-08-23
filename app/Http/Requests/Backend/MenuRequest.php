@@ -24,7 +24,8 @@ class MenuRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required',
+            'title' => 'required',
+            'area' => 'required',
             'special_url' => 'url',
         ];
     }
@@ -32,7 +33,8 @@ class MenuRequest extends Request
     public function messages()
     {
         return [
-            'name.required' => 'Ad alanını boş bırakamazsınız!',
+            'title.required' => 'Ad alanını boş bırakamazsınız!',
+            'area.required' => 'Gösterim alanını boş bırakamazsınız!',
             'special_url.url' => 'Lütfen geçerli bir url giriniz!',
         ];
     }

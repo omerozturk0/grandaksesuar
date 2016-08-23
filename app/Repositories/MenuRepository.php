@@ -54,10 +54,11 @@ class MenuRepository extends BaseRepository
         $menu->post_id = $request->post_id;
         $menu->special_url = $request->special_url;
         $menu->native = $request->native;
+        $menu->area = $request->area;
         $menu->is_active = $request->has('is_active');
         $menu->save();
 
-        $this->backend->translateCurrentLocale($menu, $request->only('name'), $request);
+        $this->backend->translateCurrentLocale($menu, $request->only('title'), $request);
     }
 
     public function update($menu, $request)
@@ -68,10 +69,11 @@ class MenuRepository extends BaseRepository
         $menu->post_id = $request->post_id;
         $menu->special_url = $request->special_url;
         $menu->native = $request->native;
+        $menu->area = $request->area;
         $menu->is_active = $request->has('is_active');
         $menu->save();
 
-        $this->backend->translateCurrentLocale($menu, $request->only('name'), $request);
+        $this->backend->translateCurrentLocale($menu, $request->only('title'), $request);
     }
 
     public function destroy($menu)

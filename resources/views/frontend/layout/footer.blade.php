@@ -33,13 +33,7 @@
                 <div class="col-md-3">
                     <div class="widget widget-categories">
                         <h4 class="widget-title">{!! $static->native('information')->title !!}</h4>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Delivery Information</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Terms and Conditions</a></li>
-                            <li><a href="#">Private Policy</a></li>
-                        </ul>
+                        {!! $frontMenus->makeNavBar('bottom') !!}
                     </div>
                 </div>
                 <div class="col-md-3">

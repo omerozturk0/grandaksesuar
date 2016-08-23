@@ -10,14 +10,16 @@ use App\Repositories\StaticRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Helpers\NavigationBar;
+use App\Helpers\FrontendMenus;
 
 class SiteController extends Controller
 {
-    public function __construct(Post $post, StaticRepository $staticRepo, NavigationBar $nav, CategoryRepository $catRepo, ProductRepository $productRepo)
+    public function __construct(Post $post, StaticRepository $staticRepo, NavigationBar $nav, CategoryRepository $catRepo, ProductRepository $productRepo, FrontendMenus $frontMenus)
     {
         $this->post = $post;
         $this->staticRepo = $staticRepo;
         $this->nav = $nav;
+        $this->frontMenus = $frontMenus;
         $this->catRepo = $catRepo;
         $this->productRepo = $productRepo;
     }
@@ -25,8 +27,9 @@ class SiteController extends Controller
     {
         $static = $this->staticRepo;
         $nav = $this->nav;
+        $frontMenus = $this->frontMenus;
 
-        return view('frontend.index', compact('static', 'nav'));
+        return view('frontend.index', compact('static', 'nav', 'frontMenus'));
     }
 
     public function routeBySlug($slug)
@@ -34,18 +37,19 @@ class SiteController extends Controller
         $post = $this->findPostBySlug($slug);
         $static = $this->staticRepo;
         $nav = $this->nav;
+        $frontMenus = $this->frontMenus;
 
         switch ($post->module_id) {
             // Sayfalar
             case 1:
-                # code...
+                return view('frontend.page', compact('post', 'static', 'nav', 'frontMenus'));
             break;
 
             // Ürün Detay
             case 2:
                 $this->productRepo->visited($post->id);
 
-                return view('frontend.product-detail', compact('post', 'static', 'nav'));
+                return view('frontend.product-detail', compact('post', 'static', 'nav', 'frontMenus'));
             break;
 
             default:
@@ -62,8 +66,9 @@ class SiteController extends Controller
         $discountProducts = $this->productRepo->allDiscountProducts();
         $static = $this->staticRepo;
         $nav = $this->nav;
+        $frontMenus = $this->frontMenus;
 
-        return view('frontend.cat', compact('post', 'static', 'nav', 'popularProducts', 'newestProducts', 'discountProducts'));
+        return view('frontend.cat', compact('post', 'static', 'nav', 'frontMenus', 'popularProducts', 'newestProducts', 'discountProducts'));
     }
 
     public function findPostBySlug($slug)

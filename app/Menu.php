@@ -13,7 +13,7 @@ class Menu extends Node
      * @var array
      */
     public $translatedAttributes = [
-        'name',
+        'title',
     ];
 
     /**

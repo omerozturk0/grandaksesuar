@@ -12,10 +12,10 @@
 @endif
 
 <div class="form-group">
-    {!! Form::label('name', 'Ad', ['class' => 'col-md-3 control-label']) !!}
+    {!! Form::label('title', 'Ad', ['class' => 'col-md-3 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('name', null, ['class' => 'form-control input-sm input-rounded', 'autofocus']) !!}
-        {!! $errors->first('name','<label for="name" class="error">:message</label>') !!}
+        {!! Form::text('title', null, ['class' => 'form-control input-sm input-rounded', 'autofocus']) !!}
+        {!! $errors->first('title','<label for="title" class="error">:message</label>') !!}
     </div>
 </div>
 
@@ -27,7 +27,7 @@
             <option value="">Yok</option>
             <optgroup label="Menüler">
                 @foreach($menus as $menu)
-                    <option value="{{ $menu->id }}" @if(isset($parent) AND $parent == $menu->id) selected @endif>{{ str_repeat('--', $menu->depth).$menu->name }}</option>
+                    <option value="{{ $menu->id }}" @if(isset($parent) AND $parent == $menu->id) selected @endif>{{ str_repeat('--', $menu->depth).$menu->title }}</option>
                 @endforeach
             </optgroup>
         </select>
@@ -66,6 +66,17 @@
         </div>
     </div>
 @endif
+
+<div class="form-group">
+    {!! Form::label('area', 'Gösterim', ['class' => 'col-md-3 control-label']) !!}
+    <div class="col-md-6">
+        <select name="area" id="area" class="form-control input-sm populate" data-plugin-selectTwo>
+            <option value="">Yok</option>
+            <option value="top">Header (Üst Kısım)</option>
+            <option value="bottom">Footer (Alt Kısım)</option>
+        </select>
+    </div>
+</div>
 
 <div class="form-group">
     {!! Form::label('is_active', 'Aktif', ['class' => 'col-md-3 control-label']) !!}

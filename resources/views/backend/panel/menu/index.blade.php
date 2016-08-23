@@ -41,7 +41,7 @@
                             @foreach($menus as $index => $menu)
                                 <tr @if(!$menu->is_active) class="danger" @endif>
                                     <td>{{ $index+1 }}</td>
-                                    <td>{{ $menu->name }}</td>
+                                    <td>{{ $menu->title }}</td>
                                     @if(auth()->user()->hasRole('owner'))
                                         <td>
                                             @if(isset($menu->native))
