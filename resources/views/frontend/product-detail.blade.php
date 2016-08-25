@@ -73,7 +73,7 @@
                                                         <select
                                                             id="exampleSelect{{ $combination->id }}"
                                                             class="selectpicker input-price" data-live-search="true" data-width="100%"
-                                                            data-toggle="tooltip" title="Özellik Seçiniz">
+                                                            data-toggle="tooltip" title="Özellik Seçiniz" name="{{ str_slug($customergroup->title.'_'.$combination->title.'_'.$combination->id) }}">
                                                             @foreach($combination->children as $notRoots)
                                                                 <option value="{!! $notRoots->title !!}">{!! $notRoots->title !!}</option>
                                                             @endforeach
@@ -99,7 +99,7 @@
                                                     <select
                                                         id="exampleSelect{{ $attribute->id }}"
                                                         class="selectpicker input-price" data-live-search="true" data-width="100%"
-                                                        data-toggle="tooltip" title="Özellik Seçiniz">
+                                                        data-toggle="tooltip" title="Özellik Seçiniz" name="{{ str_slug($attribute->title.'_'.$attribute->id) }}">
                                                         @foreach($post->attributes->where('parent_id', $attribute->id) as $notRoots)
                                                             <option value="{!! $notRoots->title !!}">{!! $notRoots->title !!}</option>
                                                         @endforeach
