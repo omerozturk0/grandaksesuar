@@ -55,6 +55,8 @@
                                             <a href="{{ route('admin.static.edit', $static->id) }}"><i
                                                         class="fa fa-pencil"></i></a>
                                         @endif
+                                        <a href="{{ url('admin/static/'.$static->id.'/pictures') }}?m=StaticContent"><i
+                                                    class="fa fa-image"></i></a>
                                         @if(Entrust::can('delete-static'))
                                             <a href="#modalIcon"
                                                data-href="{{ route('admin.static.destroy', $static->id) }}"

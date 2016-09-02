@@ -34,4 +34,9 @@ class StaticContent extends Model
     {
         return $query->where('native', $native);
     }
+
+    public function pictures()
+    {
+        return $this->morphMany('App\GlobalPicture', 'picturable')->with('translates');
+    }
 }

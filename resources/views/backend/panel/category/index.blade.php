@@ -45,6 +45,8 @@
                                             <a href="{{ route('admin.category.edit', $category->id) }}"><i
                                                         class="fa fa-pencil"></i></a>
                                         @endif
+                                        <a href="{{ url('admin/category/'.$category->id.'/pictures') }}?m=Category"><i
+                                                    class="fa fa-image"></i></a>
                                         @if(Entrust::can('delete-category'))
                                             <a href="#modalIcon"
                                                data-href="{{ route('admin.category.destroy', $category->id) }}"

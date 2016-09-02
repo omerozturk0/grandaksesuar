@@ -42,4 +42,9 @@ class Category extends Node
     {
         return $this->belongsToMany('App\Post');
     }
+
+    public function pictures()
+    {
+        return $this->morphMany('App\GlobalPicture', 'picturable')->with('translates');
+    }
 }

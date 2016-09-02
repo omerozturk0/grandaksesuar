@@ -43,6 +43,7 @@ Route::group([
 
     // Genel
     Route::controller('{module}/{id}/gallery', 'Backend\GalleryController');
+    Route::controller('{module}/{id}/pictures', 'Backend\GlobalPictureController');
     Route::controller('settings', 'Backend\SettingsController');
     Route::controller('/', 'Backend\PanelController');
 

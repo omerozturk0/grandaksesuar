@@ -30,6 +30,11 @@ class Backend
         return redirect('admin/'.$module.'/'.$id.'/gallery/upload');
     }
 
+    public function ifGlobalPictureContentNotCount($module, $id)
+    {
+        return redirect('admin/'.$module.'/'.$id.'/pictures/upload');
+    }
+
     /**
      * Formdan gelen her veriyi filtreleyen fonksiyon.
      *

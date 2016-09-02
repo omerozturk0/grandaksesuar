@@ -3,38 +3,43 @@
 namespace App\Repositories;
 
 use App\Helpers\Backend;
-use App\Picture;
+use App\GlobalPicture;
 
-class GalleryRepository extends BaseRepository
+class GlobalPictureRepository extends BaseRepository
 {
     private $backend;
 
-    public function __construct(Picture $picture, Backend $backend)
+    public function __construct(GlobalPicture $picture, Backend $backend)
     {
         $this->model = $picture;
         $this->backend = $backend;
         ini_set('memory_limit', '-1');
     }
 
-    public function all($id)
+    public function all($id, $request)
     {
-        return $this->model->postId($id)->with('translates')->get();
+        $moduleModelFileName = 'App\\'.$request->session()->get('model');
+        $moduleModelFileName = new $moduleModelFileName();
+
+        return $moduleModelFileName->find($id)->pictures;
     }
 
-    public function upload($id, $request)
+    public function upload($id, $request, $module)
     {
         $file = $request->file('file');
         $file_path = $file->getRealPath();
         $file_extension = $file->getClientOriginalExtension();
         $new_name = str_slug(str_random(10)).'-'.\Date::now()->format('dmyHis').'.'.str_slug($file_extension);
 
-        $this->makeImageResizeAndUpload($request->get('has_slider'), $file_path, $new_name);
+        $moduleModelFileName = 'App\\'.$request->session()->get('model');
+        $moduleModelFileName = new $moduleModelFileName();
 
-        $picture = new Picture();
+        $picture = new GlobalPicture();
         $picture->name = $new_name;
         $picture->extension = $file_extension;
-        $picture->post_id = $id;
-        $picture->save();
+        $moduleModelFileName->find($id)->pictures()->save($picture);
+
+        $this->makeImageResizeAndUpload($file_path, $new_name);
     }
 
     public function editImage($img_id, $request)
@@ -71,12 +76,7 @@ class GalleryRepository extends BaseRepository
         }
     }
 
-    /**
-     * @param $slider
-     * @param $file_path
-     * @param $new_name
-     */
-    public function makeImageResizeAndUpload($slider, $file_path, $new_name)
+    public function makeImageResizeAndUpload($file_path, $new_name)
     {
         $BigsDestinationPath = public_path().'/userfiles/bigs/';
         $destinationPath = public_path().'/userfiles/images/';
@@ -92,10 +92,8 @@ class GalleryRepository extends BaseRepository
             \File::makeDirectory($BigsDestinationPath);
         }
 
-        $normal_photos_width = is_null($slider) ? settings('normal_photos_width', 800) : settings('slider_photos_width',
-            1920);
-        $normal_photos_height = is_null($slider) ? settings('normal_photos_height',
-            600) : settings('slider_photos_height', 1080);
+        $normal_photos_width = settings('normal_photos_width', 800);
+        $normal_photos_height = settings('normal_photos_height', 600);
         $thumb_photos_width = settings('thumb_photos_width', 300);
         $thumb_photos_height = settings('thumb_photos_height', 200);
         $big_photos_width = settings('big_photos_width', 1920);

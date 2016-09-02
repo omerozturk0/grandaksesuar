@@ -228,18 +228,9 @@
                 <h2 class="section-title"><span>{!! $static->native('brands')->title !!}</span></h2>
                 <div class="partners-carousel">
                     <div class="owl-carousel" id="partners">
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
+                        @foreach($static->native('brands')->pictures as $picture)
+                            <div><a href="{{ url('userfiles/images/'.$picture->name) }}" data-gal="prettyPhoto"><img src="{{ url('userfiles/thumbs/'.$picture->name) }}" alt="{{ $picture->name }}"/></a></div>
+                        @endforeach
                     </div>
                 </div>
             </div>

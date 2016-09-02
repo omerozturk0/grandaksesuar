@@ -84,7 +84,7 @@ class SiteController extends Controller
 
     public function findCatBySlug($slug)
     {
-        $cat = $this->catRepo->model->whereTranslation('slug', $slug)->where('is_active', 1)->with('translates')->first();
+        $cat = $this->catRepo->model->whereTranslation('slug', $slug)->where('is_active', 1)->with('translates', 'pictures')->first();
 
         if (!$cat) {
             return abort(404);
