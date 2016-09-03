@@ -59,6 +59,7 @@ class GlobalPictureRepository extends BaseRepository
     {
         $picture = $this->getById($img_id);
 
+        \File::delete(public_path().'/userfiles/banners/'.$picture->name);
         \File::delete(public_path().'/userfiles/bigs/'.$picture->name);
         \File::delete(public_path().'/userfiles/images/'.$picture->name);
         \File::delete(public_path().'/userfiles/thumbs/'.$picture->name);
@@ -69,6 +70,7 @@ class GlobalPictureRepository extends BaseRepository
     public function multiDelete($request)
     {
         foreach ($request->get('images') as $image) {
+            \File::delete(public_path().'/userfiles/banners/'.$this->getById($image)->name);
             \File::delete(public_path().'/userfiles/bigs/'.$this->getById($image)->name);
             \File::delete(public_path().'/userfiles/images/'.$this->getById($image)->name);
             \File::delete(public_path().'/userfiles/thumbs/'.$this->getById($image)->name);
@@ -78,6 +80,7 @@ class GlobalPictureRepository extends BaseRepository
 
     public function makeImageResizeAndUpload($file_path, $new_name)
     {
+        $bannerDestinationPath = public_path().'/userfiles/banners/';
         $BigsDestinationPath = public_path().'/userfiles/bigs/';
         $destinationPath = public_path().'/userfiles/images/';
         $thumbsDestinationPath = public_path().'/userfiles/thumbs/';
@@ -91,13 +94,27 @@ class GlobalPictureRepository extends BaseRepository
         if (!\File::exists($BigsDestinationPath)) {
             \File::makeDirectory($BigsDestinationPath);
         }
+        if (!\File::exists($bannerDestinationPath)) {
+            \File::makeDirectory($bannerDestinationPath);
+        }
 
+        $slider_photos_width = settings('slider_photos_width', 1920);
+        $slider_photos_height = settings('slider_photos_height', 1080);
         $normal_photos_width = settings('normal_photos_width', 800);
         $normal_photos_height = settings('normal_photos_height', 600);
         $thumb_photos_width = settings('thumb_photos_width', 300);
         $thumb_photos_height = settings('thumb_photos_height', 200);
         $big_photos_width = settings('big_photos_width', 1920);
         $big_photos_height = settings('big_photos_height', 1080);
+
+        // Banner
+        $background = \Image::canvas($slider_photos_width, $slider_photos_height, '#ffffff');
+        $img = \Image::make($file_path)->resize($slider_photos_width, $slider_photos_height, function ($c) {
+            $c->aspectRatio();
+            $c->upsize();
+        });
+        $background->insert($img, 'center');
+        $background->save($bannerDestinationPath.$new_name);
 
         // Big
         $background = \Image::canvas($big_photos_width, $big_photos_height, '#ffffff');

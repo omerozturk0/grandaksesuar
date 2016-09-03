@@ -171,33 +171,41 @@
                     <!-- CONTENT -->
                     <div class="col-md-9 content" id="content">
 
-                        <div class="main-slider sub">
-                            <div class="owl-carousel" id="main-slider">
+                        @if(count($post->pictures) > 1)
+                            <div class="main-slider sub">
+                                <div class="owl-carousel" id="main-slider">
 
-                                @foreach($post->pictures as $picture)
-                                    <!-- Slide 1 -->
-                                    <div class="item slide1 sub" style="background: url({{ url('userfiles/images/'.$picture->name) }}) no-repeat; height: 350px; background-position: 0px; background-size: cover;">
-                                        <div class="caption">
-                                            <div class="container">
-                                                <div class="div-table">
-                                                    <div class="div-cell">
-                                                        <div class="caption-content">
-                                                            <h2 class="caption-title"><span>Winter Fashion</span></h2>
-                                                            <h3 class="caption-subtitle"><span>Collection Ready</span></h3>
-                                                            <p class="caption-text">
-                                                                <a class="btn btn-theme" href="#">Shop Now</a>
-                                                            </p>
+                                    @foreach($post->pictures as $picture)
+                                        <!-- Slide 1 -->
+                                        <div class="item slide{{ $picture->id }} sub">
+                                            <img src="{{ url('userfiles/banners/'.$picture->name) }}" class="slide-img" alt="{{ $picture->name }}" />
+                                            @if($picture->title or $picture->dsc)
+                                                <div class="caption">
+                                                    <div class="container">
+                                                        <div class="div-table">
+                                                            <div class="div-cell">
+                                                                <div class="caption-content">
+                                                                    @if($picture->title)
+                                                                        <h2 class="caption-title"><span>{!! $picture->title !!}</span></h2>
+                                                                    @endif
+                                                                    @if($picture->dsc)
+                                                                        <h3 class="caption-subtitle"><span>{!! $picture->dsc !!}</span></h3>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endif
                                         </div>
-                                    </div>
-                                    <!-- /Slide 1 -->
-                                @endforeach
+                                        <!-- /Slide 1 -->
+                                    @endforeach
 
+                                </div>
                             </div>
-                        </div>
+                        @else
+                            <img src="{{ url('userfiles/banners/'.$post->pictures->first()->name) }}" alt="{{ $post->pictures->first()->name }}" width="848" />
+                        @endif
 
                         <!-- shop-sorting -->
                         <div class="shop-sorting">
@@ -281,45 +289,7 @@
         <!-- /PAGE WITH SIDEBAR -->
 
         <!-- PAGE -->
-        <section class="page-section no-padding-top">
-            <div class="container">
-                <div class="row blocks shop-info-banners">
-                    <div class="col-md-4">
-                        <div class="block">
-                            <div class="media">
-                                <div class="pull-right"><i class="fa fa-gift"></i></div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Buy 1 Get 1</h4>
-                                    Proin dictum elementum velit. Fusce euismod consequat ante.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="block">
-                            <div class="media">
-                                <div class="pull-right"><i class="fa fa-comments"></i></div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Call to Free</h4>
-                                    Proin dictum elementum velit. Fusce euismod consequat ante.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="block">
-                            <div class="media">
-                                <div class="pull-right"><i class="fa fa-trophy"></i></div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Money Back!</h4>
-                                    Proin dictum elementum velit. Fusce euismod consequat ante.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        {!! $static->native('alt-slogan')->content !!}
         <!-- /PAGE -->
 
     </div>

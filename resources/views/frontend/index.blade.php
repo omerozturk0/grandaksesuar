@@ -11,72 +11,31 @@
                 <div class="main-slider">
                     <div class="owl-carousel" id="main-slider">
 
-                        <!-- Slide 1 -->
-                        <div class="item slide1">
-                            <img class="slide-img" src="assets/img/preview/slider/slide-1.jpg" alt=""/>
-                            <div class="caption">
-                                <div class="container">
-                                    <div class="div-table">
-                                        <div class="div-cell">
-                                            <div class="caption-content">
-                                                <h2 class="caption-title">The Biggest</h2>
-                                                <h3 class="caption-subtitle">Sale</h3>
-                                                <p class="caption-text">
-                                                    <a class="btn btn-theme" href="#">Shop Now</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Slide 1 -->
-
-                        <!-- Slide 2 -->
-                        <div class="item slide2 alt">
-                            <img class="slide-img" src="assets/img/preview/slider/slide-2.jpg" alt=""/>
-                            <div class="caption">
-                                <div class="container">
-                                    <div class="div-table">
-                                        <div class="div-cell">
-                                            <div class="caption-content">
-                                                <h2 class="caption-title">New Arrivals On Sale</h2>
-                                                <h3 class="caption-subtitle"><span>Summer Collection</span></h3>
-                                                <div class="price">
-                                                    <span>$</span><ins>49</ins>
-                                                    <span>$</span><del>86</del>
+                        @foreach($static->native('index-slider')->pictures as $picture)
+                            <!-- Slide 1 -->
+                            <div class="item slide{{ $picture->id }} sub">
+                                <img src="{{ url('userfiles/banners/'.$picture->name) }}" class="slide-img" alt="{{ $picture->name }}" />
+                                @if($picture->title or $picture->dsc)
+                                    <div class="caption">
+                                        <div class="container">
+                                            <div class="div-table">
+                                                <div class="div-cell">
+                                                    <div class="caption-content">
+                                                        @if($picture->title)
+                                                            <h2 class="caption-title"><span>{!! $picture->title !!}</span></h2>
+                                                        @endif
+                                                        @if($picture->dsc)
+                                                            <h3 class="caption-subtitle"><span>{!! $picture->dsc !!}</span></h3>
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                                <p class="caption-text">
-                                                    <a class="btn btn-theme" href="#">Shop this item Now</a>
-                                                </p>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
-                        </div>
-                        <!-- /Slide 2 -->
-
-                        <!-- Slide 3 -->
-                        <div class="item slide3 dark">
-                            <img class="slide-img" src="assets/img/preview/slider/slide-3.jpg" alt=""/>
-                            <div class="caption">
-                                <div class="container">
-                                    <div class="div-table">
-                                        <div class="div-cell">
-                                            <div class="caption-content">
-                                                <h2 class="caption-title">New Arrivals On Sale</h2>
-                                                <h3 class="caption-subtitle"><span>Summer Collection</span></h3>
-                                                <p class="caption-text">
-                                                    <a class="btn btn-theme" href="#">Shop this item Now</a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Slide 3 -->
+                            <!-- /Slide 1 -->
+                        @endforeach
 
                     </div>
                 </div>
@@ -92,36 +51,34 @@
                     <div class="col-md-6">
                         <div class="thumbnail no-border no-padding thumbnail-banner size-1x3">
                             <div class="media">
-                                <a class="media-link" href="#">
-                                    <div class="img-bg" style="background-image: url('assets/img/preview/shop/banner-1.jpg')"></div>
+                                <div class="media-link">
+                                    <div class="img-bg" style="background-image: url('assets/img/index-slider-alt-banner-1.jpg')"></div>
                                     <div class="caption">
                                         <div class="caption-wrapper div-table">
                                             <div class="caption-inner div-cell">
                                                 <h2 class="caption-title"><span>Lorem Ipsum</span></h2>
                                                 <h3 class="caption-sub-title"><span>Dolor Sir Amet Percpectum</span></h3>
-                                                <span class="btn btn-theme btn-theme-sm">Shop Now</span>
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="thumbnail no-border no-padding thumbnail-banner size-1x3">
                             <div class="media">
-                                <a class="media-link" href="#">
-                                    <div class="img-bg" style="background-image: url('assets/img/preview/shop/banner-2.jpg')"></div>
+                                <div class="media-link">
+                                    <div class="img-bg" style="background-image: url('assets/img/index-slider-alt-banner-2.jpg')"></div>
                                     <div class="caption text-right">
                                         <div class="caption-wrapper div-table">
                                             <div class="caption-inner div-cell">
                                                 <h2 class="caption-title"><span>Lorem Ipsum</span></h2>
                                                 <h3 class="caption-sub-title"><span>Dolor Sir Amet Percpectum</span></h3>
-                                                <span class="btn btn-theme btn-theme-sm">Shop Now</span>
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -136,9 +93,9 @@
 
                 <div class="tabs">
                     <ul id="tabs" class="nav nav-justified-off"><!--
-                        --><li class=""><a href="#tab-1" data-toggle="tab">Featured</a></li><!--
-                        --><li class="active"><a href="#tab-2" data-toggle="tab">Newest</a></li><!--
-                        --><li class=""><a href="#tab-3" data-toggle="tab">Top Sellers</a></li>
+                    --><li class=""><a href="#tab-1" data-toggle="tab">POPÜLER</a></li><!--
+                    --><li class="active"><a href="#tab-2" data-toggle="tab">İNDİRİM</a></li><!--
+                    --><li class=""><a href="#tab-3" data-toggle="tab">YENİ</a></li>
                     </ul>
                 </div>
 
@@ -484,7 +441,7 @@
             <div class="container">
                 <div class="message-box">
                     <div class="message-box-inner">
-                        <h2>Free shipping on all orders over $45</h2>
+                        <h2>{!! $static->native('free-shipping-over-100-tl')->title !!}</h2>
                     </div>
                 </div>
             </div>
@@ -789,21 +746,12 @@
         <!-- PAGE -->
         <section class="page-section">
             <div class="container">
-                <h2 class="section-title"><span>Brand &amp; Clients</span></h2>
+                <h2 class="section-title"><span>{!! $static->native('brands')->title !!}</span></h2>
                 <div class="partners-carousel">
                     <div class="owl-carousel" id="partners">
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
-                        <div><a href="#"><img src="assets/img/preview/partners/brand-logo.jpg" alt=""/></a></div>
+                        @foreach($static->native('brands')->pictures as $picture)
+                            <div><a href="{{ url('userfiles/images/'.$picture->name) }}" data-gal="prettyPhoto"><img src="{{ url('userfiles/thumbs/'.$picture->name) }}" alt="{{ $picture->name }}"/></a></div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -991,45 +939,7 @@
         <!-- /PAGE -->
 
         <!-- PAGE -->
-        <section class="page-section no-padding-top">
-            <div class="container">
-                <div class="row blocks shop-info-banners">
-                    <div class="col-md-4">
-                        <div class="block">
-                            <div class="media">
-                                <div class="pull-right"><i class="fa fa-gift"></i></div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Buy 1 Get 1</h4>
-                                    Proin dictum elementum velit. Fusce euismod consequat ante.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="block">
-                            <div class="media">
-                                <div class="pull-right"><i class="fa fa-comments"></i></div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Call to Free</h4>
-                                    Proin dictum elementum velit. Fusce euismod consequat ante.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="block">
-                            <div class="media">
-                                <div class="pull-right"><i class="fa fa-trophy"></i></div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Money Back!</h4>
-                                    Proin dictum elementum velit. Fusce euismod consequat ante.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        {!! $static->native('alt-slogan')->content !!}
         <!-- /PAGE -->
 
     </div>

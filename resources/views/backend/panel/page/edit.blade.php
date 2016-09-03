@@ -90,5 +90,6 @@
             entities: false,
             htmlEncodeOutput: false
         });
+        CKEDITOR.dtd.$removeEmpty['i'] = false;
     </script>
 @endsection
