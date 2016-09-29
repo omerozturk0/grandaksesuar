@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Repositories\StaticRepository;
@@ -28,8 +26,11 @@ class SiteController extends Controller
         $static = $this->staticRepo;
         $nav = $this->nav;
         $frontMenus = $this->frontMenus;
+        $popularProducts = $this->productRepo->allPopularProducts();
+        $newestProducts = $this->productRepo->allNewestProducts();
+        $discountProducts = $this->productRepo->allDiscountProducts();
 
-        return view('frontend.index', compact('static', 'nav', 'frontMenus'));
+        return view('frontend.index', compact('static', 'nav', 'frontMenus', 'popularProducts', 'newestProducts', 'discountProducts'));
     }
 
     public function routeBySlug($slug)

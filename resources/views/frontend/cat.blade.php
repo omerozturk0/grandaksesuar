@@ -170,47 +170,48 @@
                     <!-- /SIDEBAR -->
                     <!-- CONTENT -->
                     <div class="col-md-9 content" id="content">
+                        @if(count($post->pictures))
+                            @if(count($post->pictures) > 1)
+                                <div class="main-slider sub">
+                                    <div class="owl-carousel" id="main-slider">
 
-                        @if(count($post->pictures) > 1)
-                            <div class="main-slider sub">
-                                <div class="owl-carousel" id="main-slider">
-
-                                    @foreach($post->pictures as $picture)
-                                        <!-- Slide 1 -->
-                                        <div class="item slide{{ $picture->id }} sub">
-                                            <img src="{{ url('userfiles/banners/'.$picture->name) }}" class="slide-img" alt="{{ $picture->name }}" />
-                                            @if($picture->title or $picture->dsc)
-                                                <div class="caption">
-                                                    <div class="container">
-                                                        <div class="div-table">
-                                                            <div class="div-cell">
-                                                                <div class="caption-content">
-                                                                    @if($picture->title)
-                                                                        <h2 class="caption-title"><span>{!! $picture->title !!}</span></h2>
-                                                                    @endif
-                                                                    @if($picture->dsc)
-                                                                        <h3 class="caption-subtitle"><span>{!! $picture->dsc !!}</span></h3>
-                                                                    @endif
+                                        @foreach($post->pictures as $picture)
+                                            <!-- Slide 1 -->
+                                            <div class="item slide{{ $picture->id }} sub">
+                                                <img src="{{ url('userfiles/banners/'.$picture->name) }}" class="slide-img" alt="{{ $picture->name }}" />
+                                                @if($picture->title or $picture->dsc)
+                                                    <div class="caption">
+                                                        <div class="container">
+                                                            <div class="div-table">
+                                                                <div class="div-cell">
+                                                                    <div class="caption-content">
+                                                                        @if($picture->title)
+                                                                            <h2 class="caption-title"><span>{!! $picture->title !!}</span></h2>
+                                                                        @endif
+                                                                        @if($picture->dsc)
+                                                                            <h3 class="caption-subtitle"><span>{!! $picture->dsc !!}</span></h3>
+                                                                        @endif
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endif
-                                        </div>
-                                        <!-- /Slide 1 -->
-                                    @endforeach
+                                                @endif
+                                            </div>
+                                            <!-- /Slide 1 -->
+                                        @endforeach
 
+                                    </div>
                                 </div>
-                            </div>
-                        @else
-                            <img src="{{ url('userfiles/banners/'.$post->pictures->first()->name) }}" alt="{{ $post->pictures->first()->name }}" width="848" />
+                            @else
+                                <img src="{{ url('userfiles/banners/'.$post->pictures->first()->name) }}" alt="{{ $post->pictures->first()->name }}" width="848" />
+                            @endif
                         @endif
 
                         <!-- shop-sorting -->
                         <div class="shop-sorting">
                             <div class="row">
-                                <div class="col-sm-8">
+                                <div class="col-sm-8" @if(!count($post->pictures)) style="margin-top: 10px;" @endif>
                                     <form class="form-inline" action="">
                                         <div class="form-group selectpicker-wrapper">
                                             <select

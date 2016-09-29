@@ -4,45 +4,51 @@
     <!-- CONTENT AREA -->
     <div class="content-area">
 
-        <!-- PAGE -->
-        <section class="page-section no-padding slider">
-            <div class="container full-width">
+        @if(count($static->native('index-slider')->pictures))
+            @if(count($static->native('index-slider')->pictures) > 1)
+                <!-- PAGE -->
+                <section class="page-section no-padding slider">
+                    <div class="container full-width">
 
-                <div class="main-slider">
-                    <div class="owl-carousel" id="main-slider">
+                        <div class="main-slider">
+                            <div class="owl-carousel" id="main-slider">
 
-                        @foreach($static->native('index-slider')->pictures as $picture)
-                            <!-- Slide 1 -->
-                            <div class="item slide{{ $picture->id }} sub">
-                                <img src="{{ url('userfiles/banners/'.$picture->name) }}" class="slide-img" alt="{{ $picture->name }}" />
-                                @if($picture->title or $picture->dsc)
-                                    <div class="caption">
-                                        <div class="container">
-                                            <div class="div-table">
-                                                <div class="div-cell">
-                                                    <div class="caption-content">
-                                                        @if($picture->title)
-                                                            <h2 class="caption-title"><span>{!! $picture->title !!}</span></h2>
-                                                        @endif
-                                                        @if($picture->dsc)
-                                                            <h3 class="caption-subtitle"><span>{!! $picture->dsc !!}</span></h3>
-                                                        @endif
+                                @foreach($static->native('index-slider')->pictures as $picture)
+                                    <!-- Slide 1 -->
+                                    <div class="item slide{{ $picture->id }} sub">
+                                        <img src="{{ url('userfiles/banners/'.$picture->name) }}" class="slide-img" alt="{{ $picture->name }}" />
+                                        @if($picture->title or $picture->dsc)
+                                            <div class="caption">
+                                                <div class="container">
+                                                    <div class="div-table">
+                                                        <div class="div-cell">
+                                                            <div class="caption-content">
+                                                                @if($picture->title)
+                                                                    <h2 class="caption-title"><span>{!! $picture->title !!}</span></h2>
+                                                                @endif
+                                                                @if($picture->dsc)
+                                                                    <h3 class="caption-subtitle"><span>{!! $picture->dsc !!}</span></h3>
+                                                                @endif
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
-                                @endif
+                                    <!-- /Slide 1 -->
+                                @endforeach
+
                             </div>
-                            <!-- /Slide 1 -->
-                        @endforeach
+                        </div>
 
                     </div>
-                </div>
-
-            </div>
-        </section>
-        <!-- /PAGE -->
+                </section>
+                <!-- /PAGE -->
+            @else
+                <img src="{{ url('userfiles/banners/'.$static->native('index-slider')->pictures->first()->name) }}" class="slide-img" alt="{{ $static->native('index-slider')->pictures->first()->name }}" title="{{ $static->native('index-slider')->pictures->first()->title }}" />
+            @endif
+        @endif
 
         <!-- PAGE -->
         <section class="page-section">
@@ -764,173 +770,77 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="product-list">
-                            <a class="btn btn-theme btn-title-more" href="#">See All</a>
-                            <h4 class="block-title"><span>Top Sellers</span></h4>
-                            <div class="media">
-                                <a class="pull-left media-link" href="#">
-                                    <img class="media-object" src="assets/img/preview/shop/top-sellers-1.jpg" alt="">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#">Standard Product Header</a></h4>
-                                    <div class="rating">
-                                        <span class="star"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span>
+                            <h4 class="block-title"><span>Popüler Ürünler</span></h4>
+                            @foreach($popularProducts as $product)
+                                <div class="media">
+                                    <a class="pull-left media-link" href="{{ url($product->slug) }}">
+                                        @if(count($product->pictures))
+                                            <img class="media-object" src="{{ url('userfiles/thumbs/'.$product->pictures->first()->name) }}" title="{!! $product->name !!}" alt="{{ $product->pictures->first()->name }}" width="70">
+                                        @else
+                                            <img src="{{ url('assets/images/product.png') }}" alt="Image Not Found" width="70" />
+                                        @endif
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="{{ url($product->slug) }}">{!! $product->name !!}</a></h4>
+                                        @if($product->discount)
+                                            <div class="price"><ins>{{ ($product->price * (100 - $product->discount)) / 100 }} TL</ins> <del>{{ $product->price }} TL</del></div>
+                                        @else
+                                            <div class="price"><ins>{{ $product->price }} TL</ins></div>
+                                        @endif
                                     </div>
-                                    <div class="price"><ins>$400.00</ins> <del>$425.00</del></div>
                                 </div>
-                            </div>
-                            <div class="media">
-                                <a class="pull-left media-link" href="#">
-                                    <img class="media-object" src="assets/img/preview/shop/top-sellers-2.jpg" alt="">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#">Standard Product Header</a></h4>
-                                    <div class="rating">
-                                        <span class="star"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span>
-                                    </div>
-                                    <div class="price"><ins>$400.00</ins> <del>$425.00</del></div>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <a class="pull-left media-link" href="#">
-                                    <img class="media-object" src="assets/img/preview/shop/top-sellers-3.jpg" alt="">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#">Standard Product Header</a></h4>
-                                    <div class="rating">
-                                        <span class="star"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span>
-                                    </div>
-                                    <div class="price"><ins>$400.00</ins> <del>$425.00</del></div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="product-list">
-                            <a class="btn btn-theme btn-title-more" href="#">See All</a>
-                            <h4 class="block-title"><span>Top Accessories</span></h4>
-                            <div class="media">
-                                <a class="pull-left media-link" href="#">
-                                    <img class="media-object" src="assets/img/preview/shop/top-sellers-4.jpg" alt="">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#">Standard Product Header</a></h4>
-                                    <div class="rating">
-                                        <span class="star"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span>
+                            <h4 class="block-title"><span>İndirimdeki Ürünler</span></h4>
+                            @foreach($discountProducts as $product)
+                                <div class="media">
+                                    <a class="pull-left media-link" href="{{ url($product->slug) }}">
+                                        @if(count($product->pictures))
+                                            <img class="media-object" src="{{ url('userfiles/thumbs/'.$product->pictures->first()->name) }}" title="{!! $product->name !!}" alt="{{ $product->pictures->first()->name }}" width="70">
+                                        @else
+                                            <img src="{{ url('assets/images/product.png') }}" alt="Image Not Found" width="70" />
+                                        @endif
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="{{ url($product->slug) }}">{!! $product->name !!}</a></h4>
+                                        @if($product->discount)
+                                            <div class="price"><ins>{{ ($product->price * (100 - $product->discount)) / 100 }} TL</ins> <del>{{ $product->price }} TL</del></div>
+                                        @else
+                                            <div class="price"><ins>{{ $product->price }} TL</ins></div>
+                                        @endif
                                     </div>
-                                    <div class="price"><ins>$400.00</ins> <del>$425.00</del></div>
                                 </div>
-                            </div>
-                            <div class="media">
-                                <a class="pull-left media-link" href="#">
-                                    <img class="media-object" src="assets/img/preview/shop/top-sellers-5.jpg" alt="">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#">Standard Product Header</a></h4>
-                                    <div class="rating">
-                                        <span class="star"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span>
-                                    </div>
-                                    <div class="price"><ins>$400.00</ins> <del>$425.00</del></div>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <a class="pull-left media-link" href="#">
-                                    <img class="media-object" src="assets/img/preview/shop/top-sellers-6.jpg" alt="">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#">Standard Product Header</a></h4>
-                                    <div class="rating">
-                                        <span class="star"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span>
-                                    </div>
-                                    <div class="price"><ins>$400.00</ins> <del>$425.00</del></div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="product-list">
-                            <a class="btn btn-theme btn-title-more" href="#">See All</a>
-                            <h4 class="block-title"><span>Top Newest</span></h4>
-                            <div class="media">
-                                <a class="pull-left media-link" href="#">
-                                    <img class="media-object" src="assets/img/preview/shop/top-sellers-7.jpg" alt="">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#">Standard Product Header</a></h4>
-                                    <div class="rating">
-                                        <span class="star"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span>
+                            <h4 class="block-title"><span>Yeni Ürünler</span></h4>
+                            @foreach($newestProducts as $product)
+                                <div class="media">
+                                    <a class="pull-left media-link" href="{{ url($product->slug) }}">
+                                        @if(count($product->pictures))
+                                            <img class="media-object" src="{{ url('userfiles/thumbs/'.$product->pictures->first()->name) }}" title="{!! $product->name !!}" alt="{{ $product->pictures->first()->name }}" width="70">
+                                        @else
+                                            <img src="{{ url('assets/images/product.png') }}" alt="Image Not Found" width="70" />
+                                        @endif
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="{{ url($product->slug) }}">{!! $product->name !!}</a></h4>
+                                        @if($product->discount)
+                                            <div class="price"><ins>{{ ($product->price * (100 - $product->discount)) / 100 }} TL</ins> <del>{{ $product->price }} TL</del></div>
+                                        @else
+                                            <div class="price"><ins>{{ $product->price }} TL</ins></div>
+                                        @endif
                                     </div>
-                                    <div class="price"><ins>$400.00</ins> <del>$425.00</del></div>
                                 </div>
-                            </div>
-                            <div class="media">
-                                <a class="pull-left media-link" href="#">
-                                    <img class="media-object" src="assets/img/preview/shop/top-sellers-8.jpg" alt="">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#">Standard Product Header</a></h4>
-                                    <div class="rating">
-                                        <span class="star"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span>
-                                    </div>
-                                    <div class="price"><ins>$400.00</ins> <del>$425.00</del></div>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <a class="pull-left media-link" href="#">
-                                    <img class="media-object" src="assets/img/preview/shop/top-sellers-9.jpg" alt="">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="#">Standard Product Header</a></h4>
-                                    <div class="rating">
-                                        <span class="star"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span><!--
-                                        --><span class="star active"></span>
-                                    </div>
-                                    <div class="price"><ins>$400.00</ins> <del>$425.00</del></div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
